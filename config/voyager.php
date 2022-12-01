@@ -26,6 +26,7 @@ return [
     | Here you can specify voyager controller settings
     |
     */
+    
 
     'controllers' => [
         'namespace' => 'TCG\\Voyager\\Http\\Controllers',

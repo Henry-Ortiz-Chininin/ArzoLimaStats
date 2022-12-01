@@ -4,7 +4,7 @@
 3.- modificar datos de conexion DB (segun necesidad)
 4.- generar dependencias composer "composer install | composer update"
 5.- generar APP_KEY "php artisan key:generate"
-6.- aplicar "php artisan migrate | php artisan db:seed | php artisan migrate --seed" o restaurar DUMP SQL
+6.- aplicar "php artisan migrate | php artisan db:seed | php artisan migrate --seed" o restaurar "docs\stats001_Sprint3.sql" SQL
 7.- generar enlaces storage "php artisan storage:link"
 8.- permiso de escritura sobre directorio storage (chmod -R 777 storage)
 
