@@ -13,6 +13,7 @@ return [
     'user' => [
         'add_default_role_on_register' => true,
         'default_role'                 => 'user',
+        'admin_permission'             => 'browse_admin',
         'default_avatar'               => 'users/default.png',
         'redirect'                     => '/admin',
     ],
@@ -55,7 +56,7 @@ return [
     */
 
     'storage' => [
-        'disk' => 'public',
+        'disk' => env('FILESYSTEM_DRIVER', 'public'),
     ],
 
     /*
@@ -146,7 +147,10 @@ return [
         'widgets' => [
 
         ],
-
+        'data_tables' => [
+            'pageLength' => 50,
+            'lengthMenu' => [10, 25, 50, 100, 200, 500, 1000],
+        ],
     ],
 
     /*
