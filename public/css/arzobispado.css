@@ -1,0 +1,9 @@
+.header{
+    color: white;
+    font-weight: bolder;
+    background-color: #3a8e50; 
+}
+.gridRow:hover{
+    background-color: #e5f1e9; 
+    cursor:pointer;
+}

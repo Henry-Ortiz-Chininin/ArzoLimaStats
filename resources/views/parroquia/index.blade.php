@@ -1,68 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Tabs navs -->
-<ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a
-      class="nav-link active"
-      id="ex2-tab-1"
-      data-mdb-toggle="tab"
-      href="#ex2-tabs-1"
-      role="tab"
-      aria-controls="ex2-tabs-1"
-      aria-selected="true"
-      >Parroquia - Info</a
-    >
-  </li>
-  <li class="nav-item" role="presentation">
-    <a
-      class="nav-link"
-      id="ex2-tab-2"
-      data-mdb-toggle="tab"
-      href="#ex2-tabs-2"
-      role="tab"
-      aria-controls="ex2-tabs-2"
-      aria-selected="false"
-      >Miembros</a
-    >
-  </li>
-  <li class="nav-item" role="presentation">
-    <a
-      class="nav-link"
-      id="ex2-tab-3"
-      data-mdb-toggle="tab"
-      href="#ex2-tabs-3"
-      role="tab"
-      aria-controls="ex2-tabs-3"
-      aria-selected="false"
-      >Historia</a
-    >
-  </li>
-</ul>
-<!-- Tabs navs -->
 
-<!-- Tabs content -->
-<div class="tab-content" id="ex2-content">
-  <div
-    class="tab-pane fade show active"
-    id="ex2-tabs-1"
-    role="tabpanel"
-    aria-labelledby="ex2-tab-1"
-  >Parroquia - Info</div>
-  <div
-    class="tab-pane fade"
-    id="ex2-tabs-2"
-    role="tabpanel"
-    aria-labelledby="ex2-tab-2"
-  >Miembros</div>
-  <div
-    class="tab-pane fade"
-    id="ex2-tabs-3"
-    role="tabpanel"
-    aria-labelledby="ex2-tab-3"
-  >Historia</div>
+<h1>Parroquias</h1>
+<div class="container">
+<div class="row">
+  <div class="col-10">
+    <form action="{{ route('parroquia.search') }}" method="GET">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Parroquia o direcci&oacute;n" 
+        aria-label="Parroquia o direcci&oacute;n" aria-describedby="button-addon2" name="search" id="search">
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+      </div>
+    </form>    
+  </div>
+  <div class="col-2">
+    <button class="btn btn-outline-primary" type="button"  onclick="window.location='{{ route("parroquia.nuevo") }}'">Agregar</button>
+  </div>
+</div>
+
+  <div class="container text-center">
+    <div class="row header">
+      <div class="col text-start">Codigo</div>
+      <div class="col-4 text-start">Nombre Parroquia</div>
+      <div class="col-4 text-start">Direcci&oacute;n</div>
+      <div class="col-3 text-start">Correo</div>
+    </div>
+
+    @if($parroquias->isNotEmpty())
+      @foreach ($parroquias as $p)
+        <div class="row gridRow" onclick="window.location='{{ route("parroquia.editar",$p->c_codigo) }}'">
+          <div class="col text-start border-bottom">{{$p->c_codigo}}</div>
+          <div class="col-4 text-start border-bottom">{{$p->x_nombre}}</div>
+          <div class="col-4 text-start border-bottom">{{$p->x_direcc}}</div>
+          <div class="col-3 text-start border-bottom">{{$p->email}}</div>
+        </div>
+      @endforeach
+    @else 
+        <div>
+            <h2>No hay parroquias a mostrar, intente realizar una busqueda</h2>
+        </div>
+    @endif
+
+
+  </div>
 
 </div>
-<!-- Tabs content -->
+
 @endsection

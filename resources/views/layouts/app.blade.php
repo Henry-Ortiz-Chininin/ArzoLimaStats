@@ -12,6 +12,7 @@
 
         <!-- Scripts -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/arzobispado.css') }}" rel="stylesheet">
         
 
     </head>
