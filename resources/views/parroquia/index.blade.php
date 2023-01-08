@@ -6,7 +6,7 @@
 <div class="container">
 <div class="row">
   <div class="col-10">
-    <form action="{{ route('parroquia.search') }}" method="GET">
+    <form action="{{ route('parroquias.search') }}" method="GET">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Parroquia o direcci&oacute;n" 
         aria-label="Parroquia o direcci&oacute;n" aria-describedby="button-addon2" name="search" id="search">
