@@ -74,9 +74,9 @@
                     @if($Miembros)
                         @foreach ($Miembros as $miembro)
                             <div class="row gridRow" onclick="window.location='{{ route("parroquia.miembros.nuevo",[$codigo,$miembro->ID]) }}'">
-                                <div class="col-4 text-start border-bottom">{{ $miembro->nombre }}</div>
-                                <div class="col-4 text-start border-bottom">{{ $miembro->patern }}</div>
-                                <div class="col-4 text-start border-bottom">{{ $miembro->matern }}</div>
+                                <div class="col-4 text-start border">{{ $miembro->nombre }}</div>
+                                <div class="col-4 text-start border">{{ $miembro->patern }}</div>
+                                <div class="col-4 text-start border">{{ $miembro->matern }}</div>
                             </div>
                         @endforeach
                     @endif                

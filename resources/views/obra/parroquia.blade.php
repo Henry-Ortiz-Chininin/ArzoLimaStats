@@ -52,6 +52,43 @@
 
     <!-- Tabs navs -->
 
+    @csrf
+    <div class="row">
+        <div class="card">
+            <div class="card-header float-end">
+
+            </div>
+            <div class="card-body" >
+                <div class="container text-center">
+                    <div class="row header">
+                        <div class="col-2 text-start">Nombre</div>
+                        <div class="col-2 text-start">Dirección</div>
+                        <div class="col-2 text-start">Distrito</div>
+                        <div class="col-2 text-start">Tipo</div>
+                        <div class="col-2 text-start">Responsable</div>
+                        <div class="col-1 text-start">Telefono</div>
+                        <div class="col-1 text-start">Atend</div>
+                    </div>
+                    @if($Obras)
+                        @foreach($Obras as $obra)                        
+                            <div class="row gridRow">
+                                <div class="col-2 text-start border">{{ $obra->nombre }}</div>
+                                <div class="col-2 text-start border">{{ $obra->direcc }}</div>
+                                <div class="col-2 text-start border">{{ $Distritos->where('c_codigo',$obra->distri)->first()->x_nombre }}</div>
+                                <div class="col-2 text-start border">{{ $obra->tipobr }}</div>
+                                <div class="col-2 text-start border">{{ $obra->respon }}</div>
+                                <div class="col-1 text-start border">{{ $obra->telef1 }}</div>
+                                <div class="col-1 text-end border">{{ $obra->atendi }}</div>
+                            </div>
+                        @endforeach
+                    @endif                
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
 
 </div>
 

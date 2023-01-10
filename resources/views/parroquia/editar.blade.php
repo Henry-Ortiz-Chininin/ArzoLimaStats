@@ -388,8 +388,8 @@
                         {{ $Miembros->where('c_codigo',$mp->c_miembro)->first()->patern  }} 
                             {{ $Miembros->where('c_codigo',$mp->c_miembro)->first()->matern  }}
                         </div>
-                        <div class="col-5 text-start border-bottom">{{ $Cargos->where('c_codigo',$mp->c_cargo)->first()->x_nombre  }}</div>
-                        <div class="col-3 text-start border-bottom">
+                        <div class="col-5 text-start border">{{ $Cargos->where('c_codigo',$mp->c_cargo)->first()->x_nombre  }}</div>
+                        <div class="col-3 text-start border">
                             <button class="btn btn-outline-danger" onclick="window.location='{{ route("parroquia.miembros.desactivar", [$codigo, $mp->c_miembro]) }}'" type="button">Desactivar</button>
                         </div>
                     </div>

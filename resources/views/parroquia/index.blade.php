@@ -30,10 +30,10 @@
     @if($parroquias->isNotEmpty())
       @foreach ($parroquias as $p)
         <div class="row gridRow" onclick="window.location='{{ route("parroquia.editar",$p->c_codigo) }}'">
-          <div class="col text-start border-bottom">{{$p->c_codigo}}</div>
-          <div class="col-4 text-start border-bottom">{{$p->x_nombre}}</div>
-          <div class="col-4 text-start border-bottom">{{$p->x_direcc}}</div>
-          <div class="col-3 text-start border-bottom">{{$p->email}}</div>
+          <div class="col text-start border">{{$p->c_codigo}}</div>
+          <div class="col-4 text-start border">{{$p->x_nombre}}</div>
+          <div class="col-4 text-start border">{{$p->x_direcc}}</div>
+          <div class="col-3 text-start border">{{$p->email}}</div>
         </div>
       @endforeach
     @else 

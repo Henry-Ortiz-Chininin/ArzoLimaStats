@@ -62,30 +62,42 @@
                 <div class="container text-center">
                     <div class="row header">
                         <div class="col-2 text-start">Nombre</div>
-                        <div class="col-auto text-start">Tipo</div>
-                        <div class="col-2 text-start">Direccion</div>
-                        <div class="col-auto text-start">Director</div>
-                        <div class="col-1 text-start">Telefono</div>
-                        <div class="col-auto text-start">Ini</div>
-                        <div class="col-auto text-start">Prim</div>
-                        <div class="col-auto text-start">Sec</div>
-                        <div class="col-auto text-start">Des.</div>
-                        <div class="col-auto text-start">Fecha</div>
+                        <div class="col-1 text-start">Dirección</div>
+                        <div class="col-1 text-start">Distrito</div>
+                        <div class="col-1 text-start">Teléfono</div>
+                        <div class="col-2 text-start">Director</div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-2 text-end">Jard</div>
+                                <div class="col-2 text-end">Prim</div>
+                                <div class="col-2 text-end">Secu</div>
+                                <div class="col-2 text-end">Tecn</div>
+                                <div class="col-2 text-end">Ocup</div>
+                                <div class="col-2 text-end">Espe</div>      
+                            </div>                   
+                        </div>
+                        <div class="col-1 text-start">Tipo</div>
                     </div>
                     @if($Colegios)
-                        @foreach ($Colegios as $colegio)
+                        @foreach($Colegios as $colegio)                        
                             <div class="row gridRow">
-                                <div class="col-2 text-start border-bottom">{{ $colegio->nombre }}</div>
-                                <div class="col-auto text-start border-bottom">{{ $colegio->tipcol }}</div>
-                                <div class="col-2 text-start border-bottom">{{ $colegio->direcc }}</div>
-                                <div class="col-auto text-start border-bottom">{{ $colegio->direct }}</div>
-                                <div class="col-1 text-start border-bottom">{{ $colegio->telef1 }}, {{ $colegio->telfax }}</div>
-                                <div class="col-auto text-start border-bottom">{{ $colegio->inicia }}</div>
-                                <div class="col-auto text-start border-bottom">{{ $colegio->primar }}</div>
-                                <div class="col-auto text-start border-bottom">{{ $colegio->secund }}</div>
-                                <div class="col-auto text-start border-bottom">{{ $colegio->i_desactivada?'Si':'No' }}</div>
-                                <div class="col-auto text-start border-bottom">{{ 
-                                    $colegio->i_desactivada? date('Y-m-d', strtotime($colegio->d_desactivada)):'' }}</div>
+                                <div class="col-2 text-start border">{{ $colegio->nombre }}</div>
+                                <div class="col-1 text-start border">{{ $colegio->direcc }}</div>
+                                <div class="col-1 text-start border">{{ $Distritos->where('c_codigo',$colegio->distri)->first()->x_nombre }}</div>
+                                <div class="col-1 text-start border">{{ $colegio->telef1 }} {{ $colegio->telfax }}</div>
+                                <div class="col-2 text-start border">{{ $colegio->direct }}</div>
+                                <div class="col-4 border">
+                                    <div class="row">
+                                        <div class="col-2 text-end">{{ $colegio->jardin }}</div>
+                                        <div class="col-2 text-end">{{ $colegio->primar }}</div>
+                                        <div class="col-2 text-end">{{ $colegio->secund }}</div>
+                                        <div class="col-2 text-end">{{ $colegio->tecnic }}</div>
+                                        <div class="col-2 text-end">{{ $colegio->ocupac }}</div>
+                                        <div class="col-2 text-end">{{ $colegio->especi }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-1 text-start border">{{ $colegio->tipcol }}</div>                                   
+                             
                             </div>
                         @endforeach
                     @endif                
