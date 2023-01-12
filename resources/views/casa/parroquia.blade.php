@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-10">
-        <h2>Parroquia - {{ $Parroquia->x_nombre }} - Casas</h2>
+        <h3>Parroquia - {{ $Parroquia->x_nombre }} - Casas</h3>
         </div>
         <div class="col-2 align-middle">
         <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Parroquia->d_suscri)) }}</span>
@@ -52,6 +52,63 @@
 
     <!-- Tabs navs -->
 
+    @csrf
+    <div class="row">
+        <div class="card">
+            <div class="card-header float-end">
+                <button class="btn btn-outline-primary" type="button">Agregar</button>
+
+            </div>
+            <div class="card-body" >
+                <div class="container text-center">
+                    <div class="row header">
+                        <div class="col-2 text-start">Nombre</div>
+                        <div class="col-1 text-start">Dirección</div>
+                        <div class="col-1 text-start">Distrito</div>
+                        <div class="col-1 text-start">Telefono</div>
+                        <div class="col-1 text-start">Constitucion</div>
+                        <div class="col-1 text-start">Responsable</div>
+                        <div class="col-2 text-start">Observacion</div>
+                        <div class="col-1 text-start">F.Ereccion</div>
+                        <div class="col-1 text-start">Congregacion</div>
+                        <div class="col-1 text-start">Desactivada</div>
+                    </div>
+                    @if($Casas)
+                        @foreach ($Casas as $casa)
+                            <div class="row gridRow">
+                                <div class="col-2 text-start border">{{ $casa->nombre }}</div>
+                                <div class="col-1 text-start border">{{ $casa->direcc }}</div>
+                                <div class="col-1 text-start border"> 
+                                    @foreach($Distritos->where('c_codigo',$casa->distri)->all() as $distrito)
+                                        {{ $distrito->x_nombre }}
+                                    @endforeach 
+                                </div>
+                                <div class="col-1 text-start border">{{ $casa->telef1 }}, {{ $casa->telfax }}</div>
+                                <div class="col-1 text-start border">{{ date('Y-m-d', strtotime($casa->d_constitucion)) }}</div>
+                                <div class="col-1 text-start border">{{ $casa->respon }}</div>
+                                <div class="col-2 text-start border">{{ $casa->observ }}</div>
+                                <div class="col-1 text-start border">{{ date('Y-m-d', strtotime($casa->d_erecion)) }}</div>
+                                <div class="col-1 text-start border"> 
+                                    @foreach($Congregaciones->where('c_codigo',$casa->congrega)->all() as $congrega)
+                                        {{ $congrega->x_nombre }}
+                                    @endforeach 
+                                </div>
+                                <div class="col-1 text-start border">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" {{ $casa->i_desactivada?'checked':'' }}>
+                                        <label class="form-check-label" for="flexCheckChecked">{{ $casa->i_desactivada? date('Y-m-d', strtotime($casa->d_desactivada)):'' }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif                
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
 
 </div>
 

@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-10">
-        <h2>Parroquia - {{ $Parroquia->x_nombre }} - Obras</h2>
+        <h3>Parroquia - {{ $Parroquia->x_nombre }} - Obras</h3>
         </div>
         <div class="col-2 align-middle">
         <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Parroquia->d_suscri)) }}</span>
@@ -56,6 +56,7 @@
     <div class="row">
         <div class="card">
             <div class="card-header float-end">
+                <button class="btn btn-outline-primary" type="button">Agregar</button>
 
             </div>
             <div class="card-body" >
@@ -74,7 +75,11 @@
                             <div class="row gridRow">
                                 <div class="col-2 text-start border">{{ $obra->nombre }}</div>
                                 <div class="col-2 text-start border">{{ $obra->direcc }}</div>
-                                <div class="col-2 text-start border">{{ $Distritos->where('c_codigo',$obra->distri)->first()->x_nombre }}</div>
+                                <div class="col-2 text-start border">
+                                    @foreach($Distritos->where('c_codigo',$obra->distri)->all() as $distrito)
+                                        {{ $distrito->x_nombre }}
+                                    @endforeach
+                                </div>
                                 <div class="col-2 text-start border">{{ $obra->tipobr }}</div>
                                 <div class="col-2 text-start border">{{ $obra->respon }}</div>
                                 <div class="col-1 text-start border">{{ $obra->telef1 }}</div>

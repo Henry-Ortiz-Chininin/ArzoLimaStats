@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Parroquia - Nuevo</h1>
+<h3>Parroquia - Nuevo</h3>
 <div class="container">
 
   @if($errors->any())

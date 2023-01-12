@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-10">
-        <h2>Parroquia - {{ $Parroquia->x_nombre }} - Historia</h2>
+        <h3>Parroquia - {{ $Parroquia->x_nombre }} - Historia</h3>
         </div>
         <div class="col-2 align-middle">
         <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Parroquia->d_suscri)) }}</span>
@@ -52,6 +52,43 @@
 
     <!-- Tabs navs -->
 
+
+    @csrf
+    <div class="row">
+        <div class="card">
+            <div class="card-header float-end">
+
+            </div>
+            <div class="card-body" >
+                <div class="container text-center">
+                    <div class="row header">
+                        <div class="col-1 text-start">Codigo</div>
+                        <div class="col-3 text-start">Miembros</div>
+                        <div class="col-3 text-start">Cargos</div>
+                        <div class="col-2 text-start">Desde</div>
+                        <div class="col-2 text-start">Hasta</div>
+                    </div>
+                    @if($Historia)
+                        @foreach($Historia as $hito)                        
+                            <div class="row gridRow">
+                                <div class="col-1 text-start border">{{ $hito->c_miembro }}</div>
+                                <div class="col-3 text-start border">{{ $hito->x_miembro }}</div>
+                                <div class="col-3 text-start border">
+                                    @foreach($Cargos->where('c_codigo',$hito->c_cargo)->all() as $cargo)
+                                        {{ $cargo->x_nombre }}
+                                    @endforeach 
+                                </div>
+                                <div class="col-2 text-end border">{{ date('Y-m-d', strtotime($hito->d_desde)) }}</div>
+                                <div class="col-2 text-end border">{{ date('Y-m-d', strtotime($hito->d_hasta)) }}</div>
+                            </div>
+                        @endforeach
+                    @endif                
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>
 

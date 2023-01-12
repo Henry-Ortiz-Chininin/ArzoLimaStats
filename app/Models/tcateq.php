@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class casaconp extends Model
+class tcateq extends Model
 {
-
-    protected $table = 'casaconp';
+    protected $table = 'tcateq';
     protected $primaryKey = 'ID';
     use HasFactory;
 }

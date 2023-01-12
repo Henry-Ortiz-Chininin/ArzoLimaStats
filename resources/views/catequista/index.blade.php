@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-10">
-        <h2>Parroquia - {{ $Parroquia->x_nombre }} - Catequistas</h2>
+        <h3>Parroquia - {{ $Parroquia->x_nombre }} - Catequistas</h3>
         </div>
         <div class="col-2 align-middle">
         <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Parroquia->d_suscri)) }}</span>
@@ -52,6 +52,36 @@
 
     <!-- Tabs navs -->
 
+    @csrf
+    <div class="row">
+        <div class="card">
+            <div class="card-header float-end">
+                <button class="btn btn-outline-primary" type="button">Agregar</button>
+
+            </div>
+            <div class="card-body" >
+                <div class="container text-center">
+                    <div class="row header">
+                        <div class="col-1 text-start">Año</div>
+                        <div class="col-3 text-end">Catequistas</div>
+                        <div class="col-3 text-end">Agenp</div>
+                    </div>
+                    @if($Catequistas)
+                        @foreach($Catequistas as $tcateq)                        
+                            <div class="row gridRow">
+                                <div class="col-1 text-start border">{{ $tcateq->c_anno }}</div>
+                                <div class="col-3 text-end border">{{ $tcateq->n_cateq }}</div>
+                                <div class="col-3 text-end border">{{ $tcateq->n_agenp }}</div>
+                            </div>
+                        @endforeach
+
+                    @endif                
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>
 

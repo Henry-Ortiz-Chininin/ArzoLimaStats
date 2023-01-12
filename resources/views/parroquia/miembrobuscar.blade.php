@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-10">
-        <h2>Parroquia - {{ $Parroquia->x_nombre }} - Agregar Miembro</h2>
+        <h3>Parroquia - {{ $Parroquia->x_nombre }} - Agregar Miembro</h3>
         </div>
         <div class="col-2 align-middle">
         <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Parroquia->d_suscri)) }}</span>
