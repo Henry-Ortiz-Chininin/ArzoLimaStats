@@ -53,10 +53,11 @@
     <!-- Tabs navs -->
 
     @csrf
-    <div class="row">
+    <div>
         <div class="card">
             <div class="card-header float-end">
-                <button class="btn btn-outline-primary" type="button">Agregar</button>
+            <button class="btn btn-outline-primary" 
+                  onclick="window.location='{{ route("colegio.nuevo",$codigo) }}'" type="button">Agregar</button>
 
             </div>
             <div class="card-body" >
@@ -81,7 +82,7 @@
                     </div>
                     @if($Colegios)
                         @foreach($Colegios as $colegio)                        
-                            <div class="row gridRow">
+                            <div class="row gridRow" onclick="window.location='{{ route("colegio.editar",[$colegio->c_parroquia,$colegio->codigo]) }}'">
                                 <div class="col-2 text-start border">{{ $colegio->nombre }}</div>
                                 <div class="col-1 text-start border">{{ $colegio->direcc }}</div>
                                 <div class="col-1 text-start border">

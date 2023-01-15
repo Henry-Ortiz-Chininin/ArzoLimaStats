@@ -12,6 +12,8 @@ use App\Models\miembros;
 use App\Models\miemparr;
 use App\Models\capillas;
 use App\Models\cargos;
+use App\Models\histomiem;
+use App\Models\histopar;
 
 
 class ParroquiaController extends Controller
@@ -64,7 +66,7 @@ class ParroquiaController extends Controller
 
     public function nuevomiembro($codigo,$miembro){
 
-        $Miembro = miembros::where('ID',$miembro)->first(); 
+        $Miembro = miembros::where('c_codigo',$miembro)->first(); 
         $Cargos = cargos::orderBy('x_nombre')->get(); 
 
         $Parroquia = parroqui::where('c_codigo',$codigo)->first();
@@ -84,6 +86,7 @@ class ParroquiaController extends Controller
             'Cargos'=>'required',
         ]);
 
+        //Agregamos el miembro a la parroquia
         $miembro = miemparr::create([
             'c_parroquia'=>$parroquiaId,
             'c_miembro'=>$request->get('MiembroId'),
@@ -93,8 +96,89 @@ class ParroquiaController extends Controller
 
         $miembro->save();
 
+        //agregamos el evento a la historia del miembro
+        $Miembro = miembros::where('c_codigo',$request->get('MiembroId'))->first();
+        $Parroquia = parroqui::where('c_codigo',$parroquiaId)->first();
+        $Cargo = cargos::where('c_codigo',$request->get('Cargos'))->first(); 
+        $mytime = date("Y/m/d");
+
+        $historia = histomiem::create(
+            [
+                'c_miembro'=>$Miembro->c_codigo,
+                'c_parroquia'=>$parroquiaId,
+                'x_miembro'=>"{$Miembro->patern} {$Miembro->matern} {$Miembro->nombre} {$Miembro->siglas}",
+                'c_cargo'=>$Cargo->c_codigo,
+                'd_desde'=>$mytime,
+                'x_cargo'=>$Cargo->x_nombre,
+                'x_centrolab'=>$Parroquia->x_nombre
+            ]
+        );
+        $historia->save();
+
+        //Agregamos el evento a la historia de la parroquia
+        $historia = histopar::create(
+            [
+                'c_miembro'=>$Miembro->c_codigo,
+                'c_parroquia'=>$parroquiaId,
+                'x_miembro'=>"{$Miembro->patern} {$Miembro->matern} {$Miembro->nombre} {$Miembro->siglas}",
+                'c_cargo'=>$Cargo->c_codigo,
+                'd_desde'=>$mytime
+            ]
+        );
+        $historia->save();
+
+
+        $Parroquia = parroqui::where('c_codigo',$parroquiaId)->first();
+        $Parroquia->d_suscri=$mytime;
+        $Parroquia->save();
+
         return redirect()->route('parroquia.editar',$parroquiaId);
     }
+
+    public function desactivarmiembro($parroquiaId, $miembroId){
+
+        $mytime = date("Y/m/d");
+
+        
+        //Desactivamos el miembro a la parroquia
+        $miembro = miemparr::where('c_miembro',$miembroId)
+                                ->where('d_elimina', null)
+                                ->where('c_parroquia',$parroquiaId)->first();   
+        if($miembro)
+        {
+            $miembro->d_elimina=$mytime;
+            $miembro->save();    
+            
+            //agregamos el evento a la historia del miembro
+            $historiamiembro = histomiem::where('c_miembro',$miembroId)
+                                    ->where('c_cargo', $miembro->c_cargo)
+                                    ->where('c_parroquia',$parroquiaId)->first();
+            if($historiamiembro)
+            {
+                $historiamiembro->d_hasta=$mytime;
+                $historiamiembro->save();    
+            }
+
+            // Agregamos el evento a la historia de la parroquia
+            $historiaparroquia = histopar::where('c_miembro',$miembroId)
+                                    ->where('c_cargo', $miembro->c_cargo)
+                                    ->where('c_parroquia',$parroquiaId)->first();
+
+            if($historiaparroquia)
+            {
+                $historiaparroquia->d_hasta=$mytime;
+                $historiaparroquia->save();    
+            }
+        
+        } 
+        
+        $Parroquia = parroqui::where('c_codigo',$parroquiaId)->first();
+        $Parroquia->d_suscri=$mytime;
+        $Parroquia->save();
+
+        return redirect()->route('parroquia.editar',$parroquiaId);
+    }
+
 
     public function capillas($codigo){
 
@@ -118,7 +202,8 @@ class ParroquiaController extends Controller
         $Distritos = distritos::orderBy('x_nombre')->get();
         $Decanatos = decanato::orderBy('x_nombre')->get();
         $Congregaciones = congrega::orderBy('x_nombre')->get();
-        $MiembrosParroquia = miemparr::where('c_parroquia',$codigo)->get();
+        $MiembrosParroquia = miemparr::where('c_parroquia',$codigo)
+                                        ->where('d_elimina',null)->get();
 
         $Miembros = miembros::whereIn('c_codigo', miemparr::where('c_parroquia',$codigo)->select('c_miembro')->get())->get(); 
         $Cargos = cargos::whereIn('c_codigo', miemparr::where('c_parroquia',$codigo)->select('c_cargo')->get())->get(); 
@@ -171,7 +256,7 @@ class ParroquiaController extends Controller
 
         $mytime = date("Y/m/d");
 
-        $parroquia = parroqui::find($id);
+        $parroquia = parroqui::where('c_codigo',$id)->first();
         $parroquia->x_nombre=$request->get('Nombre');
         $parroquia->x_direcc=$request->get('Direccion');
         $parroquia->dirpos=$request->get('DireccionPostal');

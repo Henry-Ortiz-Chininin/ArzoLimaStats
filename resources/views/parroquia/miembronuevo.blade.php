@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{ route('parroquia.miembros.agregar',[$codigo,$Miembro->ID]) }}" method="post">
+<form action="{{ route('parroquia.miembros.agregar',[$codigo,$Miembro->c_codigo]) }}" method="post">
 @csrf
 
 
 <div class="container">
-    <div class="row">
+    <div>
         <div class="col-10">
             <h3>Parroquia - {{ $Parroquia->x_nombre }} - Agregar Miembro</h3>
         </div>

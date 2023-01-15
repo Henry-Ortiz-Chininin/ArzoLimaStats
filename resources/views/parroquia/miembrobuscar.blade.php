@@ -52,7 +52,7 @@
     <!-- Tabs navs -->
 
 
-    <div class="row">
+    <div>
         <div class="card">
             <div class="card-header float-end">
                 <form action="{{ route('parroquia.miembros.search',$codigo) }}" method="get">
@@ -73,7 +73,7 @@
                     </div>
                     @if($Miembros)
                         @foreach ($Miembros as $miembro)
-                            <div class="row gridRow" onclick="window.location='{{ route("parroquia.miembros.nuevo",[$codigo,$miembro->ID]) }}'">
+                            <div class="row gridRow" onclick="window.location='{{ route("parroquia.miembros.nuevo",[$codigo,$miembro->c_codigo]) }}'">
                                 <div class="col-4 text-start border">{{ $miembro->nombre }}</div>
                                 <div class="col-4 text-start border">{{ $miembro->patern }}</div>
                                 <div class="col-4 text-start border">{{ $miembro->matern }}</div>

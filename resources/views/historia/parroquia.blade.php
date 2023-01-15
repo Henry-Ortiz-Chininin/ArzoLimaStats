@@ -54,7 +54,7 @@
 
 
     @csrf
-    <div class="row">
+    <div>
         <div class="card">
             <div class="card-header float-end">
 

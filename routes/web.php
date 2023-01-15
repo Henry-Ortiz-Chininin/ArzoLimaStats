@@ -31,8 +31,7 @@ Route::get('/parroquia/{codigo}/miembros/search', 'ParroquiaController@buscarmie
 Route::get('/parroquia/{codigo}/miembro/{miembro}/nuevo', 'ParroquiaController@nuevomiembro')->middleware(['auth'])->name('parroquia.miembros.nuevo');
 Route::post('/parroquia/{codigo}/miembro/{miembro}/agregar', 'ParroquiaController@agregarmiembro')->middleware(['auth'])->name('parroquia.miembros.agregar');
 
-Route::get('/parroquia/{codigo}/miembro/{miembro}/desactivar', 'ParroquiaController@desactivarmiembroform')->middleware(['auth'])->name('parroquia.miembros.desactivar');
-Route::post('/parroquia/{codigo}/miembro/{miembro}/desactivar', 'ParroquiaController@desactivarmiembro')->middleware(['auth'])->name('parroquia.miembros.desactivar');
+Route::get('/parroquia/{parroquiaId}/miembro/{miembroId}/desactivar', 'ParroquiaController@desactivarmiembro')->middleware(['auth'])->name('parroquia.miembros.desactivar');
 
 Route::get('/parroquia', 'ParroquiaController@nuevo')->middleware(['auth'])->name('parroquia.nuevo');
 Route::post('/parroquia', 'ParroquiaController@agregar')->middleware(['auth'])->name('parroquia.nuevo');
@@ -42,12 +41,21 @@ Route::post('/parroquia/{codigo}', 'ParroquiaController@actualizar')->middleware
 
 //CAPILLAS
 Route::get('/parroquia/{parroquia}/capillas', 'CapillaController@index')->middleware(['auth'])->name('capillas');
+Route::get('/parroquia/{parroquia}/capillas/nuevo', 'CapillaController@nuevo')->middleware(['auth'])->name('capillas.nuevo');
+Route::get('/parroquia/{parroquia}/capilla/{capilla}', 'CapillaController@editar')->middleware(['auth'])->name('capilla.editar');
+Route::post('/parroquia/{parroquia}/capilla/guardar', 'CapillaController@guardar')->middleware(['auth'])->name('capilla.guardar');
 
 //COLEGIOS
 Route::get('/parroquia/{parroquia}/colegios', 'ColegioController@parroquia')->middleware(['auth'])->name('colegios.parroquia');
+Route::get('/parroquia/{parroquia}/colegio/nuevo', 'ColegioController@nuevo')->middleware(['auth'])->name('colegio.nuevo');
+Route::get('/parroquia/{parroquia}/colegio/{colegio}', 'ColegioController@editar')->middleware(['auth'])->name('colegio.editar');
+Route::post('/parroquia/{parroquia}/colegio/guardar', 'ColegioController@guardar')->middleware(['auth'])->name('colegio.guardar');
 
 //OBRAS
 Route::get('/parroquia/{parroquia}/obras', 'ObraController@parroquia')->middleware(['auth'])->name('obras.parroquia');
+Route::get('/parroquia/{parroquia}/obra/nuevo', 'ObraController@parroquianuevo')->middleware(['auth'])->name('obra.parroquia.nuevo');
+Route::get('/parroquia/{parroquia}/obra/{obra}', 'ObraController@parroquiaeditar')->middleware(['auth'])->name('obra.parroquia.editar');
+Route::post('/parroquia/{parroquia}/obra/guardar', 'ObraController@parroquiaguardar')->middleware(['auth'])->name('obra.parroquia.guardar');
 
 //SACRAMENTOS
 Route::get('/parroquia/{parroquia}/sacramentos', 'SacramentoController@index')->middleware(['auth'])->name('sacramentos');

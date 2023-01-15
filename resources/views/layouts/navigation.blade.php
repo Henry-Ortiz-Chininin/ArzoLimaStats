@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg" style="background-color:#ddead1; border-bottom: solid 2px #3a8e50; margin-bottom:5px;" >
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
@@ -108,8 +108,9 @@
 </nav>
 <!-- Navbar -->
 
+
+
                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                         style="display: none;">
                     @csrf
                 </form>
-

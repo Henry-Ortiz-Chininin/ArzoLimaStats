@@ -397,7 +397,7 @@
                         </div>
                         <div class="col-3 text-start border">
                             <button class="btn btn-outline-danger" onclick="window.location='{{ route("parroquia.miembros.desactivar", [$codigo, $mp->c_miembro]) }}'" type="button">Desactivar</button>
-                        </div>
+                        </div>                        
                     </div>
                 @endforeach
             @else 
