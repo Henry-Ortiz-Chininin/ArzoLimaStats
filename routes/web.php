@@ -59,12 +59,21 @@ Route::post('/parroquia/{parroquia}/obra/guardar', 'ObraController@parroquiaguar
 
 //SACRAMENTOS
 Route::get('/parroquia/{parroquia}/sacramentos', 'SacramentoController@index')->middleware(['auth'])->name('sacramentos');
+Route::get('/parroquia/{parroquia}/sacramento/nuevo', 'SacramentoController@nuevo')->middleware(['auth'])->name('sacramento.nuevo');
+Route::get('/parroquia/{parroquia}/sacramento/{sacano}', 'SacramentoController@editar')->middleware(['auth'])->name('sacramento.editar');
+Route::post('/parroquia/{parroquia}/sacramento/guardar', 'SacramentoController@guardar')->middleware(['auth'])->name('sacramento.guardar');
 
 //CASAS
 Route::get('/parroquia/{parroquia}/casas', 'CasaController@parroquia')->middleware(['auth'])->name('casas.parroquia');
+Route::get('/parroquia/{parroquia}/casa/nuevo', 'CasaController@parroquianuevo')->middleware(['auth'])->name('casa.parroquia.nuevo');
+Route::get('/parroquia/{parroquia}/casa/{casa}', 'CasaController@parroquiaeditar')->middleware(['auth'])->name('casa.parroquia.editar');
+Route::post('/parroquia/{parroquia}/casa/guardar', 'CasaController@parroquiaguardar')->middleware(['auth'])->name('casa.parroquia.guardar');
 
 //CATEQUISTA
 Route::get('/parroquia/{parroquia}/catequistas', 'CatequistaController@index')->middleware(['auth'])->name('catequistas');
+Route::get('/parroquia/{parroquia}/catequista/nuevo', 'CatequistaController@nuevo')->middleware(['auth'])->name('catequista.nuevo');
+Route::get('/parroquia/{parroquia}/catequista/{capilla}', 'CatequistaController@editar')->middleware(['auth'])->name('catequista.editar');
+Route::post('/parroquia/{parroquia}/catequista/guardar', 'CatequistaController@guardar')->middleware(['auth'])->name('catequista.guardar');
 
 //HISTORIA
 Route::get('/parroquia/{parroquia}/historia', 'HistoriaController@parroquia')->middleware(['auth'])->name('historia.parroquia');

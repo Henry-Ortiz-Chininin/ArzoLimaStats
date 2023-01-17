@@ -9,5 +9,22 @@ class sacramen extends Model
 {
     protected $table = 'sacramen';
     protected $primaryKey = 'ID';
+    public  $timestamps = false;
     use HasFactory;
+
+    protected $fillable=[
+        'c_parroquia',
+        'parroq',
+        'sacano',
+        'bauinf',
+        'baunin',
+        'baumay',
+        'bauadu',
+        'pcteca',
+        'pccole',
+        'coteca',
+        'cocole',
+        'matcat',
+        'matmix'
+    ];
 }

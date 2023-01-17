@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-10">
-        <h3>Parroquia - {{ $Parroquia->x_nombre }} - Catequistas</h3>
+        <h3>Parroquia - {{ $Parroquia->x_nombre }} - Catequistas - Nuevo</h3>
         </div>
         <div class="col-2 align-middle">
         <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Parroquia->d_suscri)) }}</span>
@@ -52,37 +52,63 @@
 
     <!-- Tabs navs -->
 
-    @csrf
-    <div>
-        <div class="card">
-            <div class="card-header float-end">
-                <button class="btn btn-outline-primary" 
-                    onclick="window.location='{{ route("catequista.nuevo",$codigo) }}'" type="button">Agregar</button>
+    <form method="POST" action="{{ route('catequista.guardar', $codigo) }}">
+                                    @csrf
 
-            </div>
-            <div class="card-body" >
-                <div class="container text-center">
-                    <div class="row header">
-                        <div class="col-1 text-start">Año</div>
-                        <div class="col-3 text-end">Catequistas</div>
-                        <div class="col-3 text-end">Agenp</div>
-                    </div>
-                    @if($Catequistas)
-                        @foreach($Catequistas as $tcateq)                        
-                            <div class="row gridRow" onclick="window.location='{{ route("catequista.editar",[$tcateq->c_parroquia,$tcateq->c_anno]) }}'">
-                                <div class="col-1 text-start border">{{ $tcateq->c_anno }}</div>
-                                <div class="col-3 text-end border">{{ $tcateq->n_cateq }}</div>
-                                <div class="col-3 text-end border">{{ $tcateq->n_agenp }}</div>
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                </div>
+                <div class="card-body" >
+                    <div class="row">
+                        <div class="col-3">
+                            {{-- Anno --}}
+                            <div class="form-group row">
+                                <label for="Agno" class="col-md-6 col-form-label text-md-right">A&ntilde;o</label>
+                                <div class="col-md-6">
+                                <input id="Agno" type="number"  min="1950" max="2100"
+                                    class="form-control @error('Agno') is-invalid @enderror"
+                                    name="Agno"
+                                    value="{{ old('Agno') }}" required autocomplete="off" autofocus
+                                    placeholder="Agno">
+
+                                    @error('Agno')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
-                        @endforeach
-
-                    @endif                
+                        </div>
+                    </div>
+                    <br/>
+                    
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <label for="n_cateq" class="col-form-label col-md-6 text-md-right">Catequistas </label>
+                                <div class="col-md-6">
+                                <input id="n_cateq" type="text" class="form-control" name="n_cateq"
+                                    value="{{ old('n_cateq') }}" autocomplete="off" autofocus></div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <label for="n_agenp" class="col-form-label col-md-6 text-md-right">Agenp</label>
+                                <div class="col-md-6">
+                                <input id="n_agenp" type="text" class="form-control" name="n_agenp"
+                                    value="{{ old('n_agenp') }}" autocomplete="off" autofocus></div>
+                            </div>
+                        </div>
+                    </div>
+       
 
                 </div>
-
             </div>
         </div>
-    </div>
+    
+    </form>  
 
 </div>
 

@@ -56,7 +56,8 @@
     <div>
         <div class="card">
             <div class="card-header float-end">
-                <button class="btn btn-outline-primary" type="button">Agregar</button>
+            <button class="btn btn-outline-primary" 
+                    onclick="window.location='{{ route("sacramento.nuevo",$codigo) }}'" type="button">Agregar</button>
 
             </div>
             <div class="card-body" >
@@ -76,7 +77,7 @@
                     </div>
                     @if($Sacramentos)
                         @foreach($Sacramentos as $sacramento)                        
-                            <div class="row gridRow">
+                            <div class="row gridRow" onclick="window.location='{{ route("sacramento.editar",[$sacramento->c_parroquia,$sacramento->sacano]) }}'">
                                 <div class="col-1 text-start border">{{ $sacramento->sacano }}</div>
                                 <div class="col-1 text-end border">{{ $sacramento->bauinf }}</div>
                                 <div class="col-1 text-end border">{{ $sacramento->baunin }}</div>

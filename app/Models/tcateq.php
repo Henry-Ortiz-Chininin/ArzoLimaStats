@@ -9,5 +9,14 @@ class tcateq extends Model
 {
     protected $table = 'tcateq';
     protected $primaryKey = 'ID';
+    public  $timestamps = false;
     use HasFactory;
+
+    protected $fillable=[
+        'c_parroquia',
+        'c_anno',
+        'n_cateq',
+        'n_agenp'
+    ];
+
 }
