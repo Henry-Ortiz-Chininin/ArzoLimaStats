@@ -32,7 +32,7 @@
           <a class="nav-link" href="{{ url('/parroquias') }}">Parroquias</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Miembros</a>
+          <a class="nav-link" href="{{ url('/miembros') }}">Miembros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/admin') }}">Tablas</a>

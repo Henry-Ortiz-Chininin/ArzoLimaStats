@@ -21,7 +21,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+/*===============================================================================*/
 //PARROQUIAS
+
 Route::get('/parroquias', 'ParroquiaController@index')->middleware(['auth'])->name('parroquias');
 Route::get('/parroquias', 'ParroquiaController@search')->middleware(['auth'])->name('parroquias.search');
 
@@ -38,6 +41,8 @@ Route::post('/parroquia', 'ParroquiaController@agregar')->middleware(['auth'])->
 
 Route::get('/parroquia/{codigo}', 'ParroquiaController@editar')->middleware(['auth'])->name('parroquia.editar');
 Route::post('/parroquia/{codigo}', 'ParroquiaController@actualizar')->middleware(['auth'])->name('parroquia.editar');
+
+/*===============================================================================*/
 
 //CAPILLAS
 Route::get('/parroquia/{parroquia}/capillas', 'CapillaController@index')->middleware(['auth'])->name('capillas');
@@ -78,7 +83,18 @@ Route::post('/parroquia/{parroquia}/catequista/guardar', 'CatequistaController@g
 //HISTORIA
 Route::get('/parroquia/{parroquia}/historia', 'HistoriaController@parroquia')->middleware(['auth'])->name('historia.parroquia');
 
+/*===============================================================================*/
+/*Miembros*/
+Route::get('/miembros', 'MiembroController@index')->middleware(['auth'])->name('miembros');
+Route::get('/miembros', 'MiembroController@search')->middleware(['auth'])->name('miembros.search');
 
+Route::get('/miembro', 'MiembroController@nuevo')->middleware(['auth'])->name('miembro.nuevo');
+Route::post('/miembro', 'MiembroController@agregar')->middleware(['auth'])->name('miembro.nuevo');
+
+Route::get('/miembro/{codigo}', 'MiembroController@editar')->middleware(['auth'])->name('miembro.editar');
+Route::post('/miembro/{codigo}', 'MiembroController@actualizar')->middleware(['auth'])->name('miembro.guardar');
+
+/*===============================================================================*/
 
 
 

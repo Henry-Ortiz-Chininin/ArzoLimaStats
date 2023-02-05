@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3>Parroquia - Nuevo</h3>
+<h3>Miembro - Nuevo</h3>
 <div class="container">
 
   @if($errors->any())
@@ -14,7 +14,7 @@
           @endif
       </div>
   @endif
-  <form method="POST" action="{{ route('parroquia.nuevo') }}">
+  <form method="POST" action="{{ route('miembro.nuevo') }}">
                               @csrf
     <div class="card">
       <div class="card-header float-end">
@@ -40,8 +40,7 @@
                         </span>
                         @enderror
                     </div>
-                </div>
-    
+                </div>    
             </div>
             <div class="col-6">
                 {{-- Siglas --}}
@@ -66,6 +65,26 @@
         </div>
         <div class="row">
             <div class="col-6">
+                {{-- Apellido paterno --}}
+                <div class="form-group row">
+                    <label for="Paterno" class="col-md-4 col-form-label text-md-right">Apellido paterno </label>
+                    <div class="col-md-6">
+                    <input id="Paterno" type="text"
+                        class="form-control @error('Paterno') is-invalid @enderror"
+                        name="Paterno"
+                        value="{{ old('Paterno') }}" required autocomplete="off" autofocus
+                        placeholder="Paterno">
+
+                        @error('Paterno')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>    
+            </div>
+
+            <div class="col-6">
                 {{-- Direccion --}}
                 <div class="form-group row">
                     <label for="Direccion" class="col-md-4 col-form-label text-md-right">Direccion</label>
@@ -82,9 +101,32 @@
                         </span>
                         @enderror
                     </div>
-                </div>
-    
+                </div>    
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                {{-- Apellido Materno --}}
+                <div class="form-group row">
+                    <label for="Materno" class="col-md-4 col-form-label text-md-right">Apellido materno</label>
+                    <div class="col-md-6">
+                        <input id="Materno" type="text"
+                            class="form-control @error('Materno') is-invalid @enderror"
+                            name="Materno"
+                            value="{{ old('Materno') }}" required autocomplete="off" autofocus
+                            placeholder="Materno">
+
+                            @error('Materno')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                    </div>
+                </div>
+        
+            </div>
+
             <div class="col-6">
                 {{-- Distrito --}}
                 <div class="form-group row">
@@ -109,17 +151,18 @@
         </div>
         <div class="row">
             <div class="col-6">
-                {{-- Direccion Postal --}}
+                {{-- Congregacion --}}
                 <div class="form-group row">
-                    <label for="DireccionPostal" class="col-md-4 col-form-label text-md-right">Direccion Postal</label>
+                    <label for="Congrecaciones" class="col-md-4 col-form-label text-md-right">Congregacion</label>
                     <div class="col-md-6">
-                    <input id="DireccionPostal" type="text"
-                        class="form-control @error('DireccionPostal') is-invalid @enderror"
-                        name="DireccionPostal"
-                        value="{{ old('DireccionPostal') }}" required autocomplete="off" autofocus
-                        placeholder="Direccion Postal">
+                        <select id="Congregaciones" name="Congregaciones" class="form-select" aria-label="Congregaciones">
+                        <option value="">--- Escoger Congregacion ---</option>
+                        @foreach ($Congregaciones as $c)
+                            <option value="{{ $c->c_codigo }}" />{{ $c->x_nombre }}</option>
+                        @endforeach
+                        </select>
 
-                        @error('DireccionPostal')
+                        @error('Congregaciones')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -212,18 +255,146 @@
     
             </div>
             <div class="col-6">
-                {{-- Fecha de Ereccion --}}
+                {{-- Sexo --}}
                 <div class="form-group row">
-                    <label for="FechaEreccion"
-                            class="col-md-4 col-form-label text-md-right">Fecha de Ereccion</label>
+                    <label for="Sexo" class="col-md-4 col-form-label text-md-right">Sexo</label>
+                    <div class="col-md-6">
+                        <select id="Sexo" name="Sexo" class="form-select" aria-label="Sexo">
+                            <option value="">--- Escoger Sexo ---</option>
+                            <option value="M" />Masculino</option>
+                            <option value="F" />Femenino</option>
+                        </select>
+
+                        @error('Sexo')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+        <div class="row">
+             <div class="col-6">
+                {{-- Fecha de Nacimiento --}}
+                <div class="form-group row">
+                    <label for="FechaNacimiento"
+                            class="col-md-4 col-form-label text-md-right">F. Nacimiento</label>
 
                     <div class="col-md-6">
-                        <input id="FechaEreccion" type="date"
-                                class="form-control @error('FechaEreccion') is-invalid @enderror"
-                                name="FechaEreccion"
-                                value="{{ old('FechaEreccion') }}" required autocomplete="off" autofocus>
+                        <input id="FechaNacimiento" type="date"
+                                class="form-control @error('FechaNacimiento') is-invalid @enderror"
+                                name="FechaNacimiento"
+                                value="{{ old('FechaNacimiento') }}" required autocomplete="off" autofocus>
 
-                        @error('FechaEreccion')
+                        @error('FechaNacimiento')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+    
+            </div>      
+             <div class="col-6">
+                {{-- Fecha de Ordenacion/Profession --}}
+                <div class="form-group row">
+                    <label for="FechaOrdenacion"
+                            class="col-md-4 col-form-label text-md-right">F. Ordenacion</label>
+
+                    <div class="col-md-6">
+                        <input id="FechaOrdenacion" type="date"
+                                class="form-control @error('FechaOrdenacion') is-invalid @enderror"
+                                name="FechaOrdenacion"
+                                value="{{ old('FechaOrdenacion') }}" required autocomplete="off" autofocus>
+
+                        @error('FechaOrdenacion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>    
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{-- Lugar Nacimiento --}}
+                <div class="form-group row">
+                    <label for="LugarNacimiento" class="col-md-4 col-form-label text-md-right">Lugar Nacimiento </label>
+                    <div class="col-md-6">
+                    <input id="LugarNacimiento" type="text"
+                        class="form-control @error('LugarNacimiento') is-invalid @enderror"
+                        name="LugarNacimiento"
+                        value="{{ old('LugarNacimiento') }}" required autocomplete="off" autofocus
+                        placeholder="Lugar Nacimiento">
+
+                        @error('LugarNacimiento')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>    
+            </div>
+
+            <div class="col-6">
+                {{-- Lugar Ordenacion/Profession --}}
+                <div class="form-group row">
+                    <label for="LugarOrdenacion" class="col-md-4 col-form-label text-md-right">Lugar Ordenacion </label>
+                    <div class="col-md-6">
+                    <input id="LugarOrdenacion" type="text"
+                        class="form-control @error('LugarOrdenacion') is-invalid @enderror"
+                        name="LugarOrdenacion"
+                        value="{{ old('LugarOrdenacion') }}" required autocomplete="off" autofocus
+                        placeholder="Lugar Ordenacion">
+
+                        @error('LugarOrdenacion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>    
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{-- Clase --}}
+                <div class="form-group row">
+                    <label for="Clase" class="col-md-4 col-form-label text-md-right">Clase</label>
+                    <div class="col-md-6">
+                        <select id="Clase" name="Clase" class="form-select" aria-label="Clase">
+                        <option value="">--- Escoger Clase ---</option>
+                        @foreach ($Clases as $clase)
+                            <option value="{{ $clase->c_codigo }}" />{{ $clase->x_nombre }}</option>
+                        @endforeach
+                        </select>
+
+                        @error('Clase')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+    
+            </div>
+            <div class="col-6">
+                {{-- Cargo --}}
+                <div class="form-group row">
+                    <label for="Cargo" class="col-md-4 col-form-label text-md-right">Cargo</label>
+                    <div class="col-md-6">
+                        <select id="Cargo" name="Cargo" class="form-select" aria-label="Cargo">
+                        <option value="">--- Escoger Clase ---</option>
+                        @foreach ($Cargos as $cargo)
+                            <option value="{{ $cargo->c_codigo }}" />{{ $cargo->x_nombre }}</option>
+                        @endforeach
+                        </select>
+
+                        @error('Cargo')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -235,31 +406,47 @@
         </div>
         <div class="row">
             <div class="col-6">
-                {{-- Congregacion --}}
+                {{-- Centro Laboral --}}
                 <div class="form-group row">
-                    <label for="Congrecaciones" class="col-md-4 col-form-label text-md-right">Congregacion</label>
+                    <label for="CentroLaboral" class="col-md-4 col-form-label text-md-right">Centro Laboral </label>
                     <div class="col-md-6">
-                        <select id="Congregaciones" name="Congregaciones" class="form-select" aria-label="Congregaciones">
-                        <option value="">--- Escoger Congregacion ---</option>
-                        @foreach ($Congregaciones as $c)
-                            <option value="{{ $c->c_codigo }}" />{{ $c->x_nombre }}</option>
-                        @endforeach
-                        </select>
+                    <input id="CentroLaboral" type="text"
+                        class="form-control @error('CentroLaboral') is-invalid @enderror"
+                        name="CentroLaboral"
+                        value="{{ old('CentroLaboral') }}" required autocomplete="off" autofocus
+                        placeholder="CentroLaboral">
 
-                        @error('Congregaciones')
+                        @error('CentroLaboral')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                </div>
+                </div>    
     
             </div>
             <div class="col-6">
+                {{-- Estudios --}}
+                <div class="form-group row">
+                    <label for="LugarOrdenacion" class="col-md-4 col-form-label text-md-right">Estudios </label>
+                    <div class="col-md-6">
+                    <input id="Estudios" type="text"
+                        class="form-control @error('Estudios') is-invalid @enderror"
+                        name="Estudios"
+                        value="{{ old('Estudios') }}" required autocomplete="off" autofocus
+                        placeholder="Estudios">
 
+                        @error('Estudios')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>    
     
             </div>
         </div>
+
         <div class="row">
             <div class="col-6">
                 {{-- Vicaria --}}
@@ -269,7 +456,7 @@
                         <select id="Vicarias" name="Vicarias" class="form-select" aria-label="Vicarias">
                         <option value="">--- Escoger Vicaria ---</option>
                         @foreach ($Vicarias as $v)
-                            <option value="{{ $v->c_codigo }}" />{{ $v->x_nombre }}</option>
+                            <option value="{{ $v->c_codigo }}" />{{ $v->nvicar }}</option>
                         @endforeach
                         </select>
 
@@ -304,6 +491,7 @@
     
             </div>
         </div>
+
         <div class="row">
             <div class="col-6">
 
