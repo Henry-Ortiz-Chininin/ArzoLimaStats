@@ -70,7 +70,7 @@
                     </div>
                     @if($Historia)
                         @foreach($Historia as $hito)                        
-                            <div class="row gridRow">
+                            <div class="row gridRow" onclick="window.location='{{ route("historia.parroquia.editar",[$hito->c_parroquia,$hito->ID]) }}'">
                                 <div class="col-1 text-start border">{{ $hito->c_miembro }}</div>
                                 <div class="col-3 text-start border">{{ $hito->x_miembro }}</div>
                                 <div class="col-3 text-start border">

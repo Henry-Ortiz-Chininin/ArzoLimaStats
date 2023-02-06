@@ -2,8 +2,44 @@
 
 @section('content')
 
-<h3>Miembro - Nuevo</h3>
+<div class="row">
+    <div class="col-10">
+    <h3>Miembro - {{ $Miembro->nombre }} - Editar</h3>
+    </div>
+    <div class="col-2 align-middle">
+    <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Miembro->suscri)) }}</span>
+    </div> 
+</div>
 <div class="container">
+  <!-- Tabs navs -->
+  <ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link active"
+        id="ex2-tab-1"
+        data-mdb-toggle="tab"
+        href='{{ route("miembro.editar",$codigo) }}'
+        role="tab"
+        aria-controls="ex2-tabs-1"
+        aria-selected="true"
+        >Miembro - Info</a
+      >
+    </li>
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="ex2-tab-2"
+        data-mdb-toggle="tab"
+        href='{{ route("historia.miembro",$codigo) }}'
+        role="tab"
+        aria-controls="ex2-tabs-2"
+        aria-selected="false"
+        >Historia</a
+      >
+    </li>
+  </ul>
+  <!-- Tabs navs -->
+
 
   @if($errors->any())
       <div class="alert alert-danger alert-block">
@@ -280,13 +316,13 @@
                 {{-- Fecha de Nacimiento --}}
                 <div class="form-group row">
                     <label for="FechaNacimiento"
-                            class="col-md-4 col-form-label text-md-right">F. Nacimiento</label>
+                            class="col-md-4 col-form-label text-md-right">F. Nacimiento </label>
 
                     <div class="col-md-6">
                         <input id="FechaNacimiento" type="date"
                                 class="form-control @error('FechaNacimiento') is-invalid @enderror"
                                 name="FechaNacimiento"
-                                value="{{ old('FechaNacimiento') }}?old('FechaNacimiento'):date('Y-m-d', strtotime($Miembro->nacimi)) }}" required autocomplete="off" autofocus>
+                                value="{{ date('Y-m-d', strtotime($Miembro->nacimi)) }}" required autocomplete="off" autofocus>
 
                         @error('FechaNacimiento')
                         <span class="invalid-feedback" role="alert">
@@ -307,7 +343,7 @@
                         <input id="FechaOrdenacion" type="date"
                                 class="form-control @error('FechaOrdenacion') is-invalid @enderror"
                                 name="FechaOrdenacion"
-                                value="{{ old('FechaOrdenacion') }}?old('FechaOrdenacion'):date('Y-m-d', strtotime($Miembro->forden)) }}" required autocomplete="off" autofocus>
+                                value="{{ date('Y-m-d', strtotime($Miembro->forden)) }}"  autocomplete="off" autofocus>
 
                         @error('FechaOrdenacion')
                         <span class="invalid-feedback" role="alert">
@@ -327,7 +363,7 @@
                     <input id="LugarNacimiento" type="text"
                         class="form-control @error('LugarNacimiento') is-invalid @enderror"
                         name="LugarNacimiento"
-                        value="{{ old('LugarNacimiento')?old('LugarNacimiento'):$Miembro->lugarn }}" required autocomplete="off" autofocus
+                        value="{{ old('LugarNacimiento')?old('LugarNacimiento'):$Miembro->lugarn }}" autocomplete="off" autofocus
                         placeholder="Lugar Nacimiento">
 
                         @error('LugarNacimiento')
@@ -347,7 +383,7 @@
                     <input id="LugarOrdenacion" type="text"
                         class="form-control @error('LugarOrdenacion') is-invalid @enderror"
                         name="LugarOrdenacion"
-                        value="{{ old('LugarOrdenacion')?old('LugarOrdenacion'):$Miembro->lugaro }}" required autocomplete="off" autofocus
+                        value="{{ old('LugarOrdenacion')?old('LugarOrdenacion'):$Miembro->lugaro }}" autocomplete="off" autofocus
                         placeholder="Lugar Ordenacion">
 
                         @error('LugarOrdenacion')
@@ -369,7 +405,7 @@
                         <select id="Clase" name="Clase" class="form-select" aria-label="Clase">
                         <option value="">--- Escoger Clase ---</option>
                         @foreach ($Clases as $clase)
-                            <option value="{{ $clase->c_codigo }}"  {{ $Miembro->c_clase==$d->c_codigo?'selected':' ' }}>{{ $clase->x_nombre }}</option>
+                            <option value="{{ $clase->c_codigo }}"  {{ $Miembro->c_clase==$clase->c_codigo?'selected':' ' }}>{{ $clase->x_nombre }}</option>
                         @endforeach
                         </select>
 
@@ -390,7 +426,7 @@
                         <select id="Cargo" name="Cargo" class="form-select" aria-label="Cargo">
                         <option value="">--- Escoger Cargo ---</option>
                         @foreach ($Cargos as $cargo)
-                            <option value="{{ $cargo->c_codigo }}" {{ $Miembro->c_cargo==$d->c_codigo?'selected':' ' }}>{{ $cargo->x_nombre }}</option>
+                            <option value="{{ $cargo->c_codigo }}" {{ $Miembro->c_cargo==$cargo->c_codigo?'selected':' ' }}>{{ $cargo->x_nombre }}</option>
                         @endforeach
                         </select>
 
@@ -413,7 +449,7 @@
                     <input id="CentroLaboral" type="text"
                         class="form-control @error('CentroLaboral') is-invalid @enderror"
                         name="CentroLaboral"
-                        value="{{ old('CentroLaboral')?old('CentroLaboral'):$Miembro->cenlab }}" required autocomplete="off" autofocus
+                        value="{{ old('CentroLaboral')?old('CentroLaboral'):$Miembro->cenlab }}" autocomplete="off" autofocus
                         placeholder="CentroLaboral">
 
                         @error('CentroLaboral')
@@ -433,7 +469,7 @@
                     <input id="Estudios" type="text"
                         class="form-control @error('Estudios') is-invalid @enderror"
                         name="Estudios"
-                        value="{{ old('Estudios')?old('Estudios'):$Miembro->estudi }}" required autocomplete="off" autofocus
+                        value="{{ old('Estudios')?old('Estudios'):$Miembro->estudi }}" autocomplete="off" autofocus
                         placeholder="Estudios">
 
                         @error('Estudios')
@@ -456,7 +492,7 @@
                         <select id="Vicarias" name="Vicarias" class="form-select" aria-label="Vicarias">
                         <option value="">--- Escoger Vicaria ---</option>
                         @foreach ($Vicarias as $v)
-                            <option value="{{ $v->c_codigo }}" {{ $Miembro->c_vicaria==$d->c_codigo?'selected':' ' }}>{{ $v->nvicar }}</option>
+                            <option value="{{ $v->c_codigo }}" {{ $Miembro->c_vicaria==$v->c_codigo?'selected':' ' }}>{{ $v->nvicar }}</option>
                         @endforeach
                         </select>
 
@@ -497,11 +533,10 @@
                 <div class="form-group row">
                     <label for="Observacion" class="col-md-4 col-form-label text-md-right">Observacion</label>
                     <div class="col-md-6">
-                    <input id="Observacion" type="text"
-                        class="form-control @error('Nombre') is-invalid @enderror"
-                        name="Nombre"
-                        value="{{ old('Observacion')?old('Observacion'):$Miembro->observ }}" autocomplete="off" autofocus
-                        placeholder="Observacion">
+                    <textarea id="Observacion" cols=50 rows=5
+                        class="form-control @error('Observacion') is-invalid @enderror"
+                        name="Observacion" autocomplete="off" autofocus
+                        placeholder="Observacion" >{{ old('Observacion')?old('Observacion'):$Miembro->observ }}</textarea>
 
                         @error('Observacion')
                         <span class="invalid-feedback" role="alert">
@@ -517,11 +552,10 @@
                 <div class="form-group row">
                     <label for="Archivo" class="col-md-4 col-form-label text-md-right">Archivo</label>
                     <div class="col-md-6">
-                    <input id="Archivo" type="text"
-                        class="form-control @error('Nombre') is-invalid @enderror"
-                        name="Nombre"
-                        value="{{ old('Archivo')?old('Archivo'):$Miembro->archiv }}" autocomplete="off" autofocus
-                        placeholder="Archivo">
+                    <textarea id="Archivo" cols=50 rows=5
+                        class="form-control @error('Archivo') is-invalid @enderror"
+                        name="Archivo"  autocomplete="off" autofocus
+                        placeholder="Archivo">{{ old('Archivo')?old('Archivo'):$Miembro->archiv }}</textarea>
 
                         @error('Archivo')
                         <span class="invalid-feedback" role="alert">
@@ -679,7 +713,7 @@
             <div class="col-6">
                 {{-- Incardi --}}
                 <div class="form-group row">
-                    <label for="Incardi" class="col-md-4 col-form-label text-md-right">Incardinacion</label>
+                    <label for="Incardi" class="col-md-4 col-form-label text-md-right">Incardinado</label>
                     <div class="col-md-8">
                         <select id="Incardi" name="Incardi" class="form-select" aria-label="Incardi">
                             <option value="1" {{ $Miembro->i_incardi==1?'Selected':'' }}>Si</option>
@@ -714,7 +748,7 @@
             <div class="col-6">
                 {{-- Excardi --}}
                 <div class="form-group row">
-                    <label for="Excardi" class="col-md-4 col-form-label text-md-right">Excardinacion</label>
+                    <label for="Excardi" class="col-md-4 col-form-label text-md-right">Excardinado</label>
                     <div class="col-md-8">
                         <select id="Excardi" name="Excardi" class="form-select" aria-label="Excardi">
                             <option value="1" {{ $Miembro->i_excardi==1?'Selected':'' }}>Si</option>

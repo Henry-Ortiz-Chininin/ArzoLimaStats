@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\parroqui;
 use App\Models\histopar;
 use App\Models\cargos;
+use App\Models\vicarias;
+use App\Models\decanato;
+use App\Models\histomiem;
+use App\Models\miembros;
 
 
 
@@ -33,77 +37,63 @@ class HistoriaController extends Controller
         return view('capilla.nuevo',['Distritos'=>$Distritos, 'Parroquia'=>$Parroquia, 'codigo'=>$parroquia]);
     }
 
-    public function parroquiaeditar($parroquia, $capilla)
+    public function parroquiaeditar($parroquia, $ID)
     {        
-        $Distritos=distritos::all();
         $Parroquia = parroqui::where('c_codigo',$parroquia)->first();
-        $Capilla = capillas::where('c_parroquia',$parroquia)
-                            ->where('codigo',$capilla)->first();
+        $Historia = histopar::where('c_parroquia',$parroquia)->where('ID',$ID)->first();
+        $Cargos = cargos::all(); 
+        $Miembros=miembros::all();
 
-        return view('capilla.editar',['Capilla'=>$Capilla, 'Distritos'=>$Distritos, 'Parroquia'=>$Parroquia, 'codigo'=>$parroquia]);
+        return view('historia.parroquia_editar',['Historia'=>$Historia, 
+                                        'Cargos'=>$Cargos, 
+                                        'Parroquia'=>$Parroquia, 
+                                        'Miembros'=>$Miembros, 
+                                        'historiaID'=>$ID, 
+                                        'codigo'=>$parroquia]);
     }
 
     public function parroquiaguardar(Request $request){
 
         $request->validate([
-            'Nombre'=>'required',
-            'Direccion'=>'required',
-            'Distritos'=>'required',
-            'Telefono'=>'required',
-            'FechaEreccion'=>'required'
+            'Cargo'=>'required',
+            'FechaDesde'=>'required',
+            'FechasHasta'=>'required'
         ]);
 
         $parroquiaId = $request->route('parroquia');
-        $mytime = date("Y/m/d");
+        $historiaId = $request->route('ID');
 
-        $codigo = $request->get('codigo'); 
-        if($codigo=='')
-        {
-            $semilla = intval(capillas::where('c_parroquia',$parroquiaId)->max('codigo'))+1;
-            $codigo=Str::padLeft($semilla, 2,'0');
-
-            $record= capillas::create([
-                'c_parroquia'=>$parroquiaId,
-                'codigo'=>$codigo,
-                'nombre'=>$request->get('Nombre'),
-                'direcc'=>$request->get('Direccion'),
-                'distri'=>$request->get('Distritos'),
-                'telef1'=>$request->get('Telefono'),
-                'telfax'=>$request->get('Fax'),
-                'sacram'=>$request->get('Sacramentos'),
-                'i_sacramentos'=>$request->get('Sacramentos')=='S'?True:False,
-                'respon'=>$request->get('Responsable'),   
-                'estado'=>$request->get('Estado'),   
-                'd_erecion'=>$request->get('FechaEreccion')    
-            ]);
-            $record->save();
-        }else{
-            $record = capillas::where('c_parroquia',$parroquiaId)
-                                ->where('codigo',$codigo)->first();
-            
-            
-            $record->nombre=$request->get('Nombre');
-            $record->direcc=$request->get('Direccion');
-            $record->distri=$request->get('Distritos');
-            $record->telef1=$request->get('Telefono');
-            $record->telfax=$request->get('Fax');
-            $record->sacram=$request->get('Sacramentos');
-            $record->i_sacramentos=$request->get('Sacramentos')=='S'?True:False;
-            $record->respon=$request->get('Responsable');
-            $record->estado=$request->get('Estado');
-            $record->d_erecion=$request->get('FechaEreccion'); 
-            $record->i_desactivada=$request->get('Desactivado');
-            $record->d_desactivada=$request->get('FechaDesactivacion');
-                                            
-            $record->save();
-
-        }
+        $record = histopar::where('c_parroquia',$parroquiaId)
+                                ->where('ID',$historiaId)->first();
 
 
+        $record->c_cargo=$request->get('Cargo');
 
-        return redirect()->route('capilla.editar', [$parroquiaId,$codigo]);
+        $record->d_desde=$request->get('FechaDesde');
+        $record->d_hasta=$request->get('FechaHasta');
+                            
+        $record->save();
+
+        return redirect()->route('historia.parroquia', $parroquiaId);
     }
 
 
+
+    public function miembro($miembro)
+    {        
+        $Miembro=miembros::where('c_codigo',$miembro)->first();
+        $Historia=histomiem::where('c_miembro',$miembro)->get();
+        $Parroquias = parroqui::all();
+        $Vicarias = vicarias::where('l_area','True')->get();        
+        $Decanatos = decanato::all();
+        $Cargos = cargos::all(); 
+
+        return view('historia.miembro')
+                    ->with('Miembro',$Miembro)
+                    ->with('Parroquias',$Parroquias)
+                    ->with('Vicarias',$Vicarias)
+                    ->with('Decanatos',$Decanatos)
+                    ->with('Historia',$Historia);
+    }
 
 }

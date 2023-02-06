@@ -82,6 +82,8 @@ Route::post('/parroquia/{parroquia}/catequista/guardar', 'CatequistaController@g
 
 //HISTORIA
 Route::get('/parroquia/{parroquia}/historia', 'HistoriaController@parroquia')->middleware(['auth'])->name('historia.parroquia');
+Route::get('/parroquia/{parroquia}/historia/{ID}', 'HistoriaController@parroquiaeditar')->middleware(['auth'])->name('historia.parroquia.editar');
+Route::post('/parroquia/{parroquia}/historia/{ID}', 'HistoriaController@parroquiaguardar')->middleware(['auth'])->name('historia.parroquia.guardar');
 
 /*===============================================================================*/
 /*Miembros*/
@@ -93,6 +95,8 @@ Route::post('/miembro', 'MiembroController@agregar')->middleware(['auth'])->name
 
 Route::get('/miembro/{codigo}', 'MiembroController@editar')->middleware(['auth'])->name('miembro.editar');
 Route::post('/miembro/{codigo}', 'MiembroController@actualizar')->middleware(['auth'])->name('miembro.guardar');
+
+Route::get('/miembro/{miembro}/historia', 'HistoriaController@miembro')->middleware(['auth'])->name('historia.miembro');
 
 /*===============================================================================*/
 
