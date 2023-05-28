@@ -151,7 +151,6 @@ class MiembroController extends Controller
             'Nombre'=>'required',
             'Direccion'=>'required',
             'Distritos'=>'required',
-            'Email'=>'required',
             'Telefono'=>'required',
             'Congregaciones'=>'required',
             'Vicarias'=>'required',

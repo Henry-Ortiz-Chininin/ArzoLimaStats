@@ -215,7 +215,7 @@
                     <input id="Email" type="text"
                         class="form-control @error('Email') is-invalid @enderror"
                         name="Email"
-                        value="{{ old('Email')?old('Email'):$Miembro->email }}" required autocomplete="off" autofocus
+                        value="{{ old('Email')?old('Email'):$Miembro->email }}"  autocomplete="off" autofocus
                         placeholder="Email">
 
                         @error('Email')

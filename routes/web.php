@@ -99,6 +99,19 @@ Route::post('/miembro/{codigo}', 'MiembroController@actualizar')->middleware(['a
 Route::get('/miembro/{miembro}/historia', 'HistoriaController@miembro')->middleware(['auth'])->name('historia.miembro');
 
 /*===============================================================================*/
+/*Congregaciones*/
+Route::get('/congregaciones', 'CongregacionController@index')->middleware(['auth'])->name('congregaciones');
+Route::get('/congregaciones', 'CongregacionController@search')->middleware(['auth'])->name('congregaciones.search');
+
+Route::get('/congregacion', 'CongregacionController@nuevo')->middleware(['auth'])->name('congregacion.nuevo');
+Route::post('/congregacion', 'CongregacionController@agregar')->middleware(['auth'])->name('congregacion.nuevo');
+
+Route::get('/congregacion/{codigo}', 'CongregacionController@editar')->middleware(['auth'])->name('congregacion.editar');
+Route::post('/congregacion/{codigo}', 'CongregacionController@actualizar')->middleware(['auth'])->name('congregacion.guardar');
+
+Route::get('/congregacion/{miembro}/historia', 'HistoriaController@congregacion')->middleware(['auth'])->name('historia.congregacion');
+
+/*===============================================================================*/
 
 
 

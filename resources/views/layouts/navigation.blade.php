@@ -35,6 +35,9 @@
           <a class="nav-link" href="{{ url('/miembros') }}">Miembros</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{ url('/congregaciones') }}">Congregaciones</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ url('/admin') }}">Tablas</a>
           </li>
         <li class="nav-item">
