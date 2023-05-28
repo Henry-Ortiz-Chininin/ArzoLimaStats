@@ -42,21 +42,15 @@ class CongregacionController extends Controller
     public function editar($codigo)
     {
         $Vicarias = vicarias::where('l_area','True')->orderBy('nvicar')->get();        
-        $Distritos = distritos::orderBy('x_nombre')->get();
-        $Cargos = cargos::orderBy('x_nombre')->get();
-        $Decanatos = decanato::orderBy('x_nombre')->get();
-        $Congregaciones = congrega::orderBy('x_nombre')->get();
-        $Casas = casacong::orderBy('nombre')->get();
-        $Religion = religcon::orderBy('c_anno')->get();
-        $TipoCongregacion = tipocong::orderBy('x_nombre')->get();
+        $Congregacion = congrega::where('c_codigo', $codigo)->get();
+        $Casas = casacong::where('c_congre', $codigo)->get();
+        $Religion = religcon::where('c_congre', $codigo)->orderBy('c_anno')->get();
 
 
         return view('congregacion.editar',['Vicarias'=>$Vicarias,
-                                        'Distritos'=>$Distritos,
-                                        'Decanatos'=>$Decanatos,
-                                        'Clases'=>$Clases,
-                                        'Cargos'=>$Cargos,
-                                        'Congregaciones'=>$Congregaciones]);
+                                        'Casas'=>$Casas,
+                                        'Religion'=>$Religion,
+                                        'Congregacion'=>$Congregacion]);
     }
 
     public function nuevo()
@@ -92,48 +86,42 @@ class CongregacionController extends Controller
         ]);
 
 
-        $count = intval(miembros::where('c_codigo','LIKE','98%')->get()->max('c_codigo'))+1;
+        $count = intval(congrega::max('c_codigo'))+1;
         $mytime = date("Y/m/d");
 
-        $Congregacion = congrega::where('c_codigo',$request->get('Congregaciones'))->first(); 
-        $Vicaria = vicarias::where('c_codigo',$request->get('Vicarias'))->first(); 
-        $Clase = clases::where('c_codigo',$request->get('Clase'))->first();
-        $Cargo = cargos::where('c_codigo',$request->get('Cargo'))->first();
-
-        $miembro = miembros::create([
+        $item = congrega::create([
             'c_codigo'=>$count,
-            'c_congrega'=>$request->get('Congregaciones'),
-            'congre'=>$Congregacion->codigo,
+            'x_nombre'=>$request->get('Nombre'),
             'c_vicaria'=>$request->get('Vicarias'),
-            'vicari'=>$Vicaria->x_nombre,
-            'c_decanato'=>$request->get('Decanatos'),
-            'nombre'=>$request->get('Nombre'),
-            'patern'=>$request->get('Paterno'),
-            'matern'=>$request->get('Materno'),
-            'sexomf'=>$request->get('Sexo'),
+            'emailcon'=>$request->get('EmailCongregacion'),
+            'derech'=>$request->get('Derecho'),
             'siglas'=>$request->get('Siglas'),
-            'nacimi'=>$request->get('FechaNacimiento'),
-            'lugarn'=>$request->get('LugarNacimiento'),
-            'forden'=>$request->get('FechaOrdenacion'),
-            'lugaro'=>$request->get('LugarOrdenacion'),
-            'clases'=>$Clase->codigo,
-            'c_clase'=>$request->get('Clase'),
-            'cargos'=>$Clase->codigo,
-            'c_cargo'=>$request->get('Clase'),
-            'cenlab'=>$request->get('CentroLaboral'),
-            'direcc'=>$request->get('Direccion'),
-            'distri'=>$request->get('Distritos'),
-            'telef1'=>$request->get('Telefono'),
-            'telfax'=>$request->get('Fax'),
-            'aparta'=>$request->get('Apartado'),
-            'email'=>$request->get('Email'),
-            'estudi'=>$request->get('Estudios'),
-            'x_nombres'=>"{$request->get('Nombre')} {$request->get('Paterno')} {$request->get('Materno')} {$request->get('Siglas')}"
+            'carism'=>$request->get('Carisma'),
+            'fundad'=>$request->get('fundad'),
+            'fundac'=>$request->get('Fechafundac'),
+            'lugarf'=>$request->get('LugarFundacion'),
+            'nomgen'=>$request->get('NombreGeneral'),
+            'dirgen'=>$request->get('DireccionGeneral'),
+            'faxgen'=>$request->get('FaxGeneral'),
+            'telgen'=>$request->get('TelefonoGeneral'),
+            'apagen'=>$request->get('LugarOrdenacion'),
+            'emailgen'=>$request->get('EmailGeneral'),
+            'desgen'=>$request->get('desgen'),
+            'hasgen'=>$request->get('hasgen'),
+            'fecfun'=>$request->get('fecfun'),
+            'nomnac'=>$request->get('NombreNacional'),
+            'dirnac'=>$request->get('DireccionNacional'),
+            'faxnac'=>$request->get('FaxNacional'),
+            'telnac'=>$request->get('TelefonoNacional'),
+            'apanac'=>$request->get('Apartado'),
+            'emailnac'=>$request->get('EmailNacional'),
+            'desnac'=>$request->get('desnac'),
+            'hasnac'=>$request->get('hasnac')
         ]);
 
-        $miembro->save();
+        $item->save();
 
-        return redirect()->route('miembros.search');
+        return redirect()->route('congregaciones.search');
         
 
     }

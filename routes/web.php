@@ -74,6 +74,12 @@ Route::get('/parroquia/{parroquia}/casa/nuevo', 'CasaController@parroquianuevo')
 Route::get('/parroquia/{parroquia}/casa/{casa}', 'CasaController@parroquiaeditar')->middleware(['auth'])->name('casa.parroquia.editar');
 Route::post('/parroquia/{parroquia}/casa/guardar', 'CasaController@parroquiaguardar')->middleware(['auth'])->name('casa.parroquia.guardar');
 
+Route::post('/congregacion/{codigo}/casa/guardar', 'CasaController@congregacionguardar')->middleware(['auth'])->name('casa.congregacion.guardar');
+Route::get('/congregacion/{codigo}/casas', 'CasaController@congregacion')->middleware(['auth'])->name('casas.congregacion');
+Route::get('/congregacion/{codigo}/casa/nuevo', 'CasaController@congregacionnuevo')->middleware(['auth'])->name('casa.congregacion.nuevo');
+Route::get('/congregacion/{codigo}/casa/{casa}', 'CasaController@congregacioneditar')->middleware(['auth'])->name('casa.congregacion.editar');
+Route::post('/congregacion/{codigo}/casa/guardar', 'CasaController@congregacionguardar')->middleware(['auth'])->name('casa.congregacion.guardar');
+
 //CATEQUISTA
 Route::get('/parroquia/{parroquia}/catequistas', 'CatequistaController@index')->middleware(['auth'])->name('catequistas');
 Route::get('/parroquia/{parroquia}/catequista/nuevo', 'CatequistaController@nuevo')->middleware(['auth'])->name('catequista.nuevo');
@@ -112,7 +118,14 @@ Route::post('/congregacion/{codigo}', 'CongregacionController@actualizar')->midd
 Route::get('/congregacion/{miembro}/historia', 'HistoriaController@congregacion')->middleware(['auth'])->name('historia.congregacion');
 
 /*===============================================================================*/
+/* Religion */
+Route::post('/congregacion/{codigo}/religion/guardar', 'ReligionController@congregacionguardar')->middleware(['auth'])->name('religion.congregacion.guardar');
+Route::get('/congregacion/{codigo}/religion', 'ReligionController@congregacion')->middleware(['auth'])->name('religion.congregacion');
+Route::get('/congregacion/{codigo}/religion/nuevo', 'ReligionController@congregacionnuevo')->middleware(['auth'])->name('religion.congregacion.nuevo');
+Route::get('/congregacion/{codigo}/religion/{casa}', 'ReligionController@congregacioneditar')->middleware(['auth'])->name('religion.congregacion.editar');
+Route::post('/congregacion/{codigo}/religion/guardar', 'ReligionController@congregacionguardar')->middleware(['auth'])->name('religion.congregacion.guardar');
 
+/*===============================================================================*/
 
 
 require __DIR__.'/auth.php';

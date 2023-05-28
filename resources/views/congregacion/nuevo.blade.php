@@ -220,7 +220,7 @@
 
 
 
-<hr />
+        <hr />
 
         <div class="row">
             <div class="col-6">
@@ -240,7 +240,7 @@
                     <input id="NombreGeneral" type="text"
                         class="form-control @error('NombreGeneral') is-invalid @enderror"
                         name="NombreGeneral"
-                        value="{{ old('Nombre') }}" required autocomplete="off" autofocus
+                        value="{{ old('NombreGeneral') }}" required autocomplete="off" autofocus
                         placeholder="Nombre">
 
                         @error('NombreGeneral')
@@ -260,7 +260,7 @@
                     <input id="NombreNacional" type="text"
                         class="form-control @error('NombreNacional') is-invalid @enderror"
                         name="NombreNacional"
-                        value="{{ old('Nombre') }}" required autocomplete="off" autofocus
+                        value="{{ old('NombreNacional') }}" required autocomplete="off" autofocus
                         placeholder="Nombre">
 
                         @error('NombreNacional')
@@ -408,7 +408,7 @@
                     <input id="FaxGeneral" type="text"
                         class="form-control @error('FaxGeneral') is-invalid @enderror"
                         name="FaxGeneral"
-                        value="{{ old('FaxGeneral') }}" required autocomplete="off" autofocus
+                        value="{{ old('FaxGeneral') }}" autocomplete="off" autofocus
                         placeholder="Celular/Whatsapp">
 
                         @error('FaxGeneral')
