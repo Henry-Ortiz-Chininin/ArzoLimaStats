@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\parroqui;
 use App\Models\casaconp;
+use App\Models\casacong;
 use App\Models\congrega;
 use App\Models\distritos;
 use Illuminate\Support\Str;
@@ -132,7 +133,7 @@ class CasaController extends Controller
                     ->with('Distritos',$Distritos)
                     ->with('Casas',$Casas)
                     ->with('Congregacion',$Congregacion)
-                    ->with('codigo',$Congregacion);
+                    ->with('codigo',$congregacion);
     }
 
     public function congregacionnuevo($congregacion)
@@ -140,7 +141,7 @@ class CasaController extends Controller
         $Distritos=distritos::all();
         $Congregacion = congrega::where('c_codigo',$congregacion)->first();
 
-        return view('casa.congregacion.nuevo')
+        return view('casa.congregacion_nuevo')
                             ->with('Distritos',$Distritos)
                             ->with('Congregacion',$Congregacion)
                             ->with('codigo',$congregacion);
@@ -165,7 +166,6 @@ class CasaController extends Controller
 
         $request->validate([
             'Nombre'=>'required',
-            'Congregaciones'=>'required',
             'Direccion'=>'required',
             'Distritos'=>'required',
             'Telefono'=>'required',
@@ -178,13 +178,12 @@ class CasaController extends Controller
         $codigo = $request->get('codigo'); 
         if($codigo=='')
         {
-            $semilla = intval(casaconp::where('c_parroquia',$parroquiaId)->max('codigo'))+1;
+            $semilla = intval(casacong::where('c_congre',$congregacionId)->max('codigo'))+1;
             $codigo=Str::padLeft($semilla, 3,'0');
 
-            $record= casaconp::create([
-                'c_parroquia'=>$parroquiaId,
+            $record= casacong::create([
+                'c_congre'=>$congregacionId,
                 'codigo'=>$codigo,
-                'c_congre'=>$request->get('Congregaciones'),
                 'd_constitucion'=>$request->get('FechaConsitucion'),
                 'd_erecion'=>$request->get('FechaEreccion'),  
                 'respon'=>$request->get('Responsable'),   
@@ -198,11 +197,7 @@ class CasaController extends Controller
             ]);
             $record->save();
         }else{
-            $record = casaconp::where('c_parroquia',$parroquiaId)
-                                ->where('codigo',$codigo)->first();
-            
-            
-            $record->c_congre=$request->get('Congregaciones'); 
+            $record = casacong::where('c_congre',$congregacionId);
             $record->d_constitucion=$request->get('FechaConsitucion'); 
             $record->d_erecion=$request->get('FechaEreccion'); 
             $record->respon=$request->get('Responsable');
@@ -223,6 +218,8 @@ class CasaController extends Controller
 
 
         return redirect()->route('casa.congregacion.editar', [$congregacionId,$codigo]);
+
+        
     }
 
 }

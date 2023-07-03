@@ -56,11 +56,24 @@ Route::get('/parroquia/{parroquia}/colegio/nuevo', 'ColegioController@nuevo')->m
 Route::get('/parroquia/{parroquia}/colegio/{colegio}', 'ColegioController@editar')->middleware(['auth'])->name('colegio.editar');
 Route::post('/parroquia/{parroquia}/colegio/guardar', 'ColegioController@guardar')->middleware(['auth'])->name('colegio.guardar');
 
+Route::get('/congregacion/{congregacion}/colegios', 'ColegioController@congregacion')->middleware(['auth'])->name('colegios.congregacion');
+Route::get('/congregacion/{congregacion}/colegio/nuevo', 'ColegioController@congregacion_nuevo')->middleware(['auth'])->name('colegio.congregacion.nuevo');
+Route::get('/congregacion/{congregacion}/colegio/{colegio}', 'ColegioController@congregacion_editar')->middleware(['auth'])->name('colegio.congregacion.editar');
+Route::post('/congregacion/{congregacion}/colegio/guardar', 'ColegioController@congregacion_guardar')->middleware(['auth'])->name('colegio.congregacion.guardar');
+
+
 //OBRAS
 Route::get('/parroquia/{parroquia}/obras', 'ObraController@parroquia')->middleware(['auth'])->name('obras.parroquia');
 Route::get('/parroquia/{parroquia}/obra/nuevo', 'ObraController@parroquianuevo')->middleware(['auth'])->name('obra.parroquia.nuevo');
 Route::get('/parroquia/{parroquia}/obra/{obra}', 'ObraController@parroquiaeditar')->middleware(['auth'])->name('obra.parroquia.editar');
 Route::post('/parroquia/{parroquia}/obra/guardar', 'ObraController@parroquiaguardar')->middleware(['auth'])->name('obra.parroquia.guardar');
+
+
+Route::get('/congregacion/{congregacion}/obras', 'ObraController@congregacion')->middleware(['auth'])->name('obras.congregacion');
+Route::get('/congregacion/{congregacion}/obra/nuevo', 'ObraController@congregacionnuevo')->middleware(['auth'])->name('obra.congregacion.nuevo');
+Route::get('/congregacion/{congregacion}/obra/{obra}', 'ObraController@congregacioneditar')->middleware(['auth'])->name('obra.congregacion.editar');
+Route::post('/congregacion/{congregacion}/obra/guardar', 'ObraController@congregacionguardar')->middleware(['auth'])->name('obra.congregacion.guardar');
+
 
 //SACRAMENTOS
 Route::get('/parroquia/{parroquia}/sacramentos', 'SacramentoController@index')->middleware(['auth'])->name('sacramentos');
@@ -74,11 +87,10 @@ Route::get('/parroquia/{parroquia}/casa/nuevo', 'CasaController@parroquianuevo')
 Route::get('/parroquia/{parroquia}/casa/{casa}', 'CasaController@parroquiaeditar')->middleware(['auth'])->name('casa.parroquia.editar');
 Route::post('/parroquia/{parroquia}/casa/guardar', 'CasaController@parroquiaguardar')->middleware(['auth'])->name('casa.parroquia.guardar');
 
-Route::post('/congregacion/{codigo}/casa/guardar', 'CasaController@congregacionguardar')->middleware(['auth'])->name('casa.congregacion.guardar');
-Route::get('/congregacion/{codigo}/casas', 'CasaController@congregacion')->middleware(['auth'])->name('casas.congregacion');
-Route::get('/congregacion/{codigo}/casa/nuevo', 'CasaController@congregacionnuevo')->middleware(['auth'])->name('casa.congregacion.nuevo');
-Route::get('/congregacion/{codigo}/casa/{casa}', 'CasaController@congregacioneditar')->middleware(['auth'])->name('casa.congregacion.editar');
-Route::post('/congregacion/{codigo}/casa/guardar', 'CasaController@congregacionguardar')->middleware(['auth'])->name('casa.congregacion.guardar');
+Route::get('/congregacion/{congregacion}/casas', 'CasaController@congregacion')->middleware(['auth'])->name('casas.congregacion');
+Route::get('/congregacion/{congregacion}/casa/nuevo', 'CasaController@congregacionnuevo')->middleware(['auth'])->name('casa.congregacion.nuevo');
+Route::get('/congregacion/{congregacion}/casa/{casa}', 'CasaController@congregacioneditar')->middleware(['auth'])->name('casa.congregacion.editar');
+Route::post('/congregacion/{congregacion}/casa/guardar', 'CasaController@congregacionguardar')->middleware(['auth'])->name('casa.congregacion.guardar');
 
 //CATEQUISTA
 Route::get('/parroquia/{parroquia}/catequistas', 'CatequistaController@index')->middleware(['auth'])->name('catequistas');
@@ -119,11 +131,10 @@ Route::get('/congregacion/{miembro}/historia', 'HistoriaController@congregacion'
 
 /*===============================================================================*/
 /* Religion */
-Route::post('/congregacion/{codigo}/religion/guardar', 'ReligionController@congregacionguardar')->middleware(['auth'])->name('religion.congregacion.guardar');
 Route::get('/congregacion/{codigo}/religion', 'ReligionController@congregacion')->middleware(['auth'])->name('religion.congregacion');
-Route::get('/congregacion/{codigo}/religion/nuevo', 'ReligionController@congregacionnuevo')->middleware(['auth'])->name('religion.congregacion.nuevo');
-Route::get('/congregacion/{codigo}/religion/{casa}', 'ReligionController@congregacioneditar')->middleware(['auth'])->name('religion.congregacion.editar');
-Route::post('/congregacion/{codigo}/religion/guardar', 'ReligionController@congregacionguardar')->middleware(['auth'])->name('religion.congregacion.guardar');
+Route::get('/congregacion/{codigo}/religion/nuevo', 'ReligionController@congregacionnuevo')->middleware(['auth'])->name('religion.nuevo');
+Route::get('/congregacion/{codigo}/religion/{casa}', 'ReligionController@congregacioneditar')->middleware(['auth'])->name('religion.editar');
+Route::post('/congregacion/{codigo}/religion/guardar', 'ReligionController@congregacionguardar')->middleware(['auth'])->name('religion.guardar');
 
 /*===============================================================================*/
 

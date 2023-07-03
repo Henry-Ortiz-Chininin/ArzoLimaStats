@@ -9,5 +9,17 @@ class religcon extends Model
 {
     protected $table = 'religcon';
     protected $primaryKey = 'ID';
+    public  $timestamps = false;
     use HasFactory;
+
+
+    protected $fillable=[
+        'c_congre',
+        'c_anno',
+        'n_profesas',
+        'n_profesos',
+        'n_sacerdotes',
+        'n_laicosconsagrados'
+
+    ];
 }

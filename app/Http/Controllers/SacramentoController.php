@@ -43,7 +43,7 @@ class SacramentoController extends Controller
         ]);
 
         $parroquiaId = $request->route('parroquia');
-        $record = tcateq::where('c_parroquia',$parroquiaId)
+        $record = sacramen::where('c_parroquia',$parroquiaId)
                             ->where('c_anno',$request->get('Agno'))->first();
 
         if($record){

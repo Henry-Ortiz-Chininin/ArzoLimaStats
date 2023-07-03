@@ -10,7 +10,7 @@ class casaconp extends Model
 
     protected $table = 'casaconp';
     protected $primaryKey = 'ID';
-    public  $timestamps = false;
+    public  $timestamps = false;    
     use HasFactory;
 
     protected $fillable=[

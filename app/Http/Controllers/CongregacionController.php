@@ -42,7 +42,7 @@ class CongregacionController extends Controller
     public function editar($codigo)
     {
         $Vicarias = vicarias::where('l_area','True')->orderBy('nvicar')->get();        
-        $Congregacion = congrega::where('c_codigo', $codigo)->get();
+        $Congregacion = congrega::where('c_codigo', $codigo)->first();
         $Casas = casacong::where('c_congre', $codigo)->get();
         $Religion = religcon::where('c_congre', $codigo)->orderBy('c_anno')->get();
 
@@ -50,6 +50,7 @@ class CongregacionController extends Controller
         return view('congregacion.editar',['Vicarias'=>$Vicarias,
                                         'Casas'=>$Casas,
                                         'Religion'=>$Religion,
+                                        'codigo'=>$codigo,
                                         'Congregacion'=>$Congregacion]);
     }
 
@@ -128,8 +129,63 @@ class CongregacionController extends Controller
 
 
     public function actualizar(Request $request){
+        $request->validate([
+            'Nombre'=>'required',
+            'Vicarias'=>'required',
+            'siglas'=>'required',
+            'emailcon'=>'required',
+            'fundad'=>'required',
+            'lugarf'=>'required',
+            'fundac'=>'required',
+            'nomgen'=>'required',
+            'nomnac'=>'required',
+            'dirgen'=>'required',
+            'dirnac'=>'required',
+            'emailgen'=>'required',
+            'emailnac'=>'required',
+            'telgen'=>'required',
+            'telnac'=>'required',
+            'fecfun'=>'required'
+        ]);
         
-        
+        $id = $request->route('codigo');
+
+        $mytime = date("Y/m/d");
+
+        $item = congrega::where('c_codigo',$id)->first();
+        $item->x_nombre=$request->get('Nombre');
+        $item->c_vicaria=$request->get('Vicarias');
+        $item->emailcon=$request->get('emailcon');
+        $item->derech=$request->get('Derecho');
+        $item->siglas=$request->get('siglas');
+        $item->carism=$request->get('Carisma');
+        $item->fundad=$request->get('fundad');
+        $item->fundac=$request->get('fundac');
+        $item->lugarf=$request->get('lugarf');
+        $item->nomgen=$request->get('nomgen');
+        $item->dirgen=$request->get('dirgen');
+        $item->faxgen=$request->get('faxgen');
+        $item->telgen=$request->get('telgen');
+        $item->apagen=$request->get('apagen');
+        $item->emailgen=$request->get('emailgen');
+        $item->desgen=$request->get('desgen');
+        $item->hasgen=$request->get('hasgen');
+        $item->fecfun=$request->get('fecfun');
+        $item->nomnac=$request->get('nomnac');
+        $item->dirnac=$request->get('dirnac');
+        $item->faxnac=$request->get('faxnac');
+        $item->telnac=$request->get('telnac');
+        $item->apanac=$request->get('apanac');
+        $item->emailnac=$request->get('emailnac');
+        $item->desnac=$request->get('desnac');
+        $item->hasnac=$request->get('hasnac');
+
+        $item->d_suscrip=$mytime;
+
+
+        $item->save();
+
+        return redirect()->route('congregacion.editar', $id);
 
     }
 

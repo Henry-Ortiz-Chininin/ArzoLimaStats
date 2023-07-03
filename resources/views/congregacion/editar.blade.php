@@ -7,7 +7,7 @@
       <h3>Congregacion - {{ $Congregacion->x_nombre }} </h3>
     </div>
     <div class="col-2 align-middle">
-      <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Congregacion->d_suscri)) }}</span>
+      <span class="badge bg-secondary">{{ date('Y-m-d', strtotime($Congregacion->d_suscrip)) }}</span>
     </div> 
   </div>
 
@@ -253,8 +253,8 @@
                     <div class="col-md-6">
                         <input id="fundac" type="date"
                                 class="form-control @error('fundac') is-invalid @enderror"
-                                name="fundac"
-                                value="{{ old('fundac')?old('fundac'):$Congregacion->fundac }}" 
+                                name="fundac" 
+                                value="{{ date('Y-m-d', strtotime($Congregacion->fundac)) }}" 
                                 required autocomplete="off" autofocus>
 
                         @error('fundac')
@@ -509,7 +509,7 @@
                         class="form-control @error('apagen') is-invalid @enderror"
                         name="apagen"
                         value="{{ old('apagen')?old('apagen'):$Congregacion->apagen }}" 
-                        required autocomplete="off" autofocus
+                        autocomplete="off" autofocus
                         placeholder="Apartado">
 
                         @error('apagen')
@@ -530,7 +530,7 @@
                         class="form-control @error('apanac') is-invalid @enderror"
                         name="apanac"
                         value="{{ old('apanac')?old('apanac'):$Congregacion->apanac }}" 
-                        required autocomplete="off" autofocus
+                        autocomplete="off" autofocus
                         placeholder="Apartado">
 
                         @error('apanac')
@@ -554,7 +554,8 @@
                         <input id="fecfun" type="date"
                                 class="form-control @error('fecfun') is-invalid @enderror"
                                 name="fecfun"
-                                value="{{ old('fecfun')?old('fecfun'):$Congregacion->fecfun }}" 
+                                value="{{ date('Y-m-d', strtotime($Congregacion->fecfun)) }}" 
+
                                 required autocomplete="off" autofocus>
 
                         @error('fecfun')
@@ -583,7 +584,7 @@
                         <input id="desgen" type="date"
                                 class="form-control @error('desgen') is-invalid @enderror"
                                 name="desgen"
-                                value="{{ old('desgen')?old('desgen'):$Congregacion->desgen }}" 
+                                value="{{ date('Y-m-d', strtotime($Congregacion->desgen)) }}" 
                                 required autocomplete="off" autofocus>
 
                         @error('desgen')
@@ -605,7 +606,7 @@
                         <input id="desnac" type="date"
                                 class="form-control @error('desnac') is-invalid @enderror"
                                 name="desnac"
-                                value="{{ old('desnac')?old('desnac'):$Congregacion->desnac }}" 
+                                value="{{ date('Y-m-d', strtotime($Congregacion->desnac)) }}" 
                                 required autocomplete="off" autofocus>
 
                         @error('desnac')
@@ -629,7 +630,7 @@
                         <input id="hasgen" type="date"
                                 class="form-control @error('hasgen') is-invalid @enderror"
                                 name="hasgen"
-                                value="{{ old('hasgen')?old('hasgen'):$Congregacion->hasgen }}" 
+                                value="{{ date('Y-m-d', strtotime($Congregacion->hasgen)) }}" 
                                 required autocomplete="off" autofocus>
 
                         @error('hasgen')
@@ -651,7 +652,7 @@
                         <input id="hasnac" type="date"
                                 class="form-control @error('hasnac') is-invalid @enderror"
                                 name="hasnac"
-                                value="{{ old('hasnac')?old('hasnac'):$Congregacion->hasnac }}" 
+                                value="{{ date('Y-m-d', strtotime($Congregacion->hasnac)) }}" 
                                 required autocomplete="off" autofocus>
 
                         @error('hasnac')
